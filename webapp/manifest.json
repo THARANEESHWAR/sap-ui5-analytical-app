@@ -53,6 +53,7 @@
         "sap.ui.core": {},
         "sap.ui.layout": {},
         "sap.m": {},
+        "sap.uxap": {},
         "sap.ui.table": {},
         "sap.ui.comp": {},
         "sap.suite.ui.microchart": {},

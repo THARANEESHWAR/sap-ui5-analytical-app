@@ -25,24 +25,24 @@
                     class="sapUiSmallMarginBottom"
                     justifyContent="SpaceAround">
                     <VBox class="kpiBox">
-                        <Text text="Total Sales" class="kpiLabel" />
-                        <Text text="$1,234,567" class="kpiValue" />
-                        <Text text="+12.5%" class="kpiTrend positive" />
+                        <Text text="{i18n>kpiTotalSales}" class="kpiLabel" />
+                        <Text text="{/kpiTotalSales}" class="kpiValue" />
+                        <Text text="{/kpiTotalSalesTrend}" class="kpiTrend positive" />
                     </VBox>
                     <VBox class="kpiBox">
-                        <Text text="Total Orders" class="kpiLabel" />
-                        <Text text="2,456" class="kpiValue" />
-                        <Text text="+8.3%" class="kpiTrend positive" />
+                        <Text text="{i18n>kpiTotalOrders}" class="kpiLabel" />
+                        <Text text="{/kpiTotalOrders}" class="kpiValue" />
+                        <Text text="{/kpiTotalOrdersTrend}" class="kpiTrend positive" />
                     </VBox>
                     <VBox class="kpiBox">
-                        <Text text="Avg Order Value" class="kpiLabel" />
-                        <Text text="$502" class="kpiValue" />
-                        <Text text="+4.1%" class="kpiTrend positive" />
+                        <Text text="{i18n>kpiAvgOrderValue}" class="kpiLabel" />
+                        <Text text="{/kpiAvgOrderValue}" class="kpiValue" />
+                        <Text text="{/kpiAvgOrderValueTrend}" class="kpiTrend positive" />
                     </VBox>
                     <VBox class="kpiBox">
-                        <Text text="Customer Count" class="kpiLabel" />
-                        <Text text="1,234" class="kpiValue" />
-                        <Text text="+15.2%" class="kpiTrend positive" />
+                        <Text text="{i18n>kpiCustomerCount}" class="kpiLabel" />
+                        <Text text="{/kpiCustomerCount}" class="kpiValue" />
+                        <Text text="{/kpiCustomerCountTrend}" class="kpiTrend positive" />
                     </VBox>
                 </HBox>
 
@@ -50,30 +50,32 @@
                 <Panel headerText="{i18n>filters}" expandable="true" expanded="true">
                     <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
                         <f:content>
-                            <Label text="{i18n>labelDateRange}" />
-                            <DateRangeSelection
-                                displayFormat="MMM dd, yyyy"
-                                value="{path: '/dateFrom'}"
-                                value2="{path: '/dateTo'}"
-                                change="onFilterChange" />
                             <Label text="{i18n>labelRegion}" />
                             <MultiComboBox
-                                items="{/regions}"
                                 selectedKeys="{/selectedRegions}"
-                                change="onFilterChange">
-                                <core:Item key="{region}" text="{region}" />
+                                selectionChange="onFilterChange">
+                                <core:ListItem key="North" text="North" />
+                                <core:ListItem key="South" text="South" />
+                                <core:ListItem key="East" text="East" />
+                                <core:ListItem key="West" text="West" />
+                                <core:ListItem key="Central" text="Central" />
                             </MultiComboBox>
                             <Label text="{i18n>labelProduct}" />
                             <MultiComboBox
-                                items="{/products}"
                                 selectedKeys="{/selectedProducts}"
-                                change="onFilterChange">
-                                <core:Item key="{product}" text="{product}" />
+                                selectionChange="onFilterChange">
+                                <core:ListItem key="Product A" text="Product A" />
+                                <core:ListItem key="Product B" text="Product B" />
+                                <core:ListItem key="Product C" text="Product C" />
+                                <core:ListItem key="Product D" text="Product D" />
+                                <core:ListItem key="Product E" text="Product E" />
+                                <core:ListItem key="Product F" text="Product F" />
                             </MultiComboBox>
                             <Label text="{i18n>labelSearchField}" />
                             <SearchField
                                 width="100%"
                                 search="onSearch"
+                                liveChange="onSearch"
                                 placeholder="{i18n>searchPlaceholder}" />
                         </f:content>
                     </f:SimpleForm>
@@ -90,44 +92,56 @@
                         <OverflowToolbar>
                             <Title text="{i18n>salesData}" />
                             <ToolbarSpacer />
+                            <Text text="{= ${/sales}.length + ' records'}" class="sapUiSmallMarginEnd" />
                             <Button
                                 icon="sap-icon://download"
                                 press="onExport"
                                 tooltip="{i18n>btnExport}" />
-                            <Button
-                                icon="sap-icon://settings"
-                                press="onColumnSettings"
-                                tooltip="{i18n>btnColumnSettings}" />
                         </OverflowToolbar>
                     </headerToolbar>
                     <columns>
-                        <Column>
-                            <Text text="Date" />
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>colDate}" />
                         </Column>
                         <Column>
-                            <Text text="Region" />
+                            <Text text="{i18n>colRegion}" />
                         </Column>
                         <Column>
-                            <Text text="Product" />
+                            <Text text="{i18n>colProduct}" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>colCategory}" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="{i18n>colQuantity}" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="{i18n>colAmount}" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>colSalesRep}" />
+                        </Column>
+                        <Column minScreenWidth="Desktop" demandPopin="true">
+                            <Text text="{i18n>colCustomer}" />
                         </Column>
                         <Column>
-                            <Text text="Quantity" />
-                        </Column>
-                        <Column>
-                            <Text text="Amount" />
-                        </Column>
-                        <Column>
-                            <Text text="Status" />
+                            <Text text="{i18n>status}" />
                         </Column>
                     </columns>
                     <items>
-                        <ColumnListItem>
+                        <ColumnListItem press="onItemPress" type="Navigation">
                             <cells>
                                 <Text text="{date}" />
                                 <Text text="{region}" />
                                 <Text text="{product}" />
+                                <Text text="{category}" />
                                 <Text text="{quantity}" />
-                                <Text text="{amount}" />
+                                <Text text="{
+                                    parts: [{path: 'amount'}],
+                                    formatter: '.formatter.formatAmount'
+                                }" />
+                                <Text text="{salesRep}" />
+                                <Text text="{customer}" />
                                 <ObjectStatus
                                     state="{statusState}"
                                     text="{status}" />
@@ -139,3 +153,4 @@
         </content>
     </Page>
 </mvc:View>
+

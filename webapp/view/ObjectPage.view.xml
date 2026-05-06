@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View
+    controllerName="com.tharaneeshwar.analyticalapp.controller.ObjectPage"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    displayBlock="true">
+    <uxap:ObjectPageLayout id="objectPageLayout" showTitleInHeaderContent="true">
+        <uxap:headerTitle>
+            <uxap:ObjectPageHeader
+                objectTitle="{/record/product}"
+                objectSubtitle="{/record/customer}">
+                <uxap:actions>
+                    <Button icon="sap-icon://nav-back" press="onNavBack" text="{i18n>btnBack}" />
+                </uxap:actions>
+            </uxap:ObjectPageHeader>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <HBox wrap="Wrap" class="sapUiSmallMarginBegin">
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>colDate}" />
+                    <Text text="{/record/date}" />
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>colRegion}" />
+                    <Text text="{/record/region}" />
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>colCategory}" />
+                    <Text text="{/record/category}" />
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>status}" />
+                    <ObjectStatus state="{/record/statusState}" text="{/record/status}" />
+                </VBox>
+            </HBox>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection title="{i18n>sectionOrderDetails}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="{i18n>sectionOrderDetails}">
+                        <layout:VerticalLayout width="100%" class="sapUiSmallMargin">
+                            <layout:HorizontalLayout class="sapUiSmallMarginBottom">
+                                <VBox class="detailBox">
+                                    <Label text="{i18n>colQuantity}" class="detailLabel" />
+                                    <Text text="{/record/quantity}" class="detailValue" />
+                                </VBox>
+                                <VBox class="detailBox">
+                                    <Label text="{i18n>colAmount}" class="detailLabel" />
+                                    <Text text="{
+                                        parts: [{path: '/record/amount'}],
+                                        formatter: '.formatter.formatAmount'
+                                    }" class="detailValue" />
+                                </VBox>
+                                <VBox class="detailBox">
+                                    <Label text="{i18n>colSalesRep}" class="detailLabel" />
+                                    <Text text="{/record/salesRep}" class="detailValue" />
+                                </VBox>
+                            </layout:HorizontalLayout>
+                        </layout:VerticalLayout>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

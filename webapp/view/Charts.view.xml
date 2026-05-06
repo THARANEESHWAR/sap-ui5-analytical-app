@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View
+    controllerName="com.tharaneeshwar.analyticalapp.controller.Charts"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m"
+    displayBlock="true">
+    <Page id="chartsPage" title="{i18n>chartsTitle}">
+        <headerContent>
+            <Button
+                icon="sap-icon://nav-back"
+                press="onNavBack"
+                tooltip="{i18n>btnBack}" />
+        </headerContent>
+        <content>
+            <layout:BlockLayout>
+                <layout:BlockLayoutRow>
+                    <layout:BlockLayoutCell
+                        title="{i18n>categoryBreakdownTitle}"
+                        backgroundColorSet="ColorSet1"
+                        backgroundColorShade="ShadeA">
+                        <VBox id="chartCategory" height="400px" class="chartContainer" />
+                    </layout:BlockLayoutCell>
+                    <layout:BlockLayoutCell
+                        title="{i18n>statusBreakdownTitle}"
+                        backgroundColorSet="ColorSet2"
+                        backgroundColorShade="ShadeA">
+                        <VBox id="chartStatus" height="400px" class="chartContainer" />
+                    </layout:BlockLayoutCell>
+                </layout:BlockLayoutRow>
+                <layout:BlockLayoutRow>
+                    <layout:BlockLayoutCell
+                        title="{i18n>salesRepTitle}"
+                        backgroundColorSet="ColorSet3"
+                        backgroundColorShade="ShadeA"
+                        width="1">
+                        <VBox id="chartSalesRep" height="400px" class="chartContainer" />
+                    </layout:BlockLayoutCell>
+                </layout:BlockLayoutRow>
+            </layout:BlockLayout>
+        </content>
+    </Page>
+</mvc:View>

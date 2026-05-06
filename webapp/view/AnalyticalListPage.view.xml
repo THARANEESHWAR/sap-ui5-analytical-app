@@ -13,6 +13,10 @@
                 press="onRefresh"
                 tooltip="{i18n>btnRefresh}" />
             <Button
+                icon="sap-icon://pie-chart"
+                press="onNavigateToCharts"
+                tooltip="{i18n>chartsTitle}" />
+            <Button
                 icon="sap-icon://list"
                 press="onNavigateToList"
                 tooltip="{i18n>btnList}" />

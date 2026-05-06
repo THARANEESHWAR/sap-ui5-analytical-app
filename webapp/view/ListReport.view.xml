@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View
+    controllerName="com.tharaneeshwar.analyticalapp.controller.ListReport"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    displayBlock="true">
+    <Page id="listReportPage" title="{i18n>pageTitle}">
+        <headerContent>
+            <Button
+                icon="sap-icon://refresh"
+                press="onRefresh"
+                tooltip="{i18n>btnRefresh}" />
+            <Button
+                icon="sap-icon://chart-bar"
+                press="onNavigateToAnalytics"
+                tooltip="{i18n>btnAnalytics}" />
+        </headerContent>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <!-- KPI Section -->
+                <HBox
+                    fitContainer="true"
+                    class="sapUiSmallMarginBottom"
+                    justifyContent="SpaceAround">
+                    <VBox class="kpiBox">
+                        <Text text="Total Sales" class="kpiLabel" />
+                        <Text text="$1,234,567" class="kpiValue" />
+                        <Text text="+12.5%" class="kpiTrend positive" />
+                    </VBox>
+                    <VBox class="kpiBox">
+                        <Text text="Total Orders" class="kpiLabel" />
+                        <Text text="2,456" class="kpiValue" />
+                        <Text text="+8.3%" class="kpiTrend positive" />
+                    </VBox>
+                    <VBox class="kpiBox">
+                        <Text text="Avg Order Value" class="kpiLabel" />
+                        <Text text="$502" class="kpiValue" />
+                        <Text text="+4.1%" class="kpiTrend positive" />
+                    </VBox>
+                    <VBox class="kpiBox">
+                        <Text text="Customer Count" class="kpiLabel" />
+                        <Text text="1,234" class="kpiValue" />
+                        <Text text="+15.2%" class="kpiTrend positive" />
+                    </VBox>
+                </HBox>
+
+                <!-- Filters Section -->
+                <Panel headerText="{i18n>filters}" expandable="true" expanded="true">
+                    <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                        <f:content>
+                            <Label text="{i18n>labelDateRange}" />
+                            <DateRangeSelection
+                                displayFormat="MMM dd, yyyy"
+                                value="{path: '/dateFrom'}"
+                                value2="{path: '/dateTo'}"
+                                change="onFilterChange" />
+                            <Label text="{i18n>labelRegion}" />
+                            <MultiComboBox
+                                items="{/regions}"
+                                selectedKeys="{/selectedRegions}"
+                                change="onFilterChange">
+                                <core:Item key="{region}" text="{region}" />
+                            </MultiComboBox>
+                            <Label text="{i18n>labelProduct}" />
+                            <MultiComboBox
+                                items="{/products}"
+                                selectedKeys="{/selectedProducts}"
+                                change="onFilterChange">
+                                <core:Item key="{product}" text="{product}" />
+                            </MultiComboBox>
+                            <Label text="{i18n>labelSearchField}" />
+                            <SearchField
+                                width="100%"
+                                search="onSearch"
+                                placeholder="{i18n>searchPlaceholder}" />
+                        </f:content>
+                    </f:SimpleForm>
+                </Panel>
+
+                <!-- Data Table Section -->
+                <Table
+                    id="salesTable"
+                    items="{path: '/sales', templateShareable: false}"
+                    class="sapUiSmallMarginTop"
+                    mode="MultiSelect"
+                    enableBusyIndicator="true">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="{i18n>salesData}" />
+                            <ToolbarSpacer />
+                            <Button
+                                icon="sap-icon://download"
+                                press="onExport"
+                                tooltip="{i18n>btnExport}" />
+                            <Button
+                                icon="sap-icon://settings"
+                                press="onColumnSettings"
+                                tooltip="{i18n>btnColumnSettings}" />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="Date" />
+                        </Column>
+                        <Column>
+                            <Text text="Region" />
+                        </Column>
+                        <Column>
+                            <Text text="Product" />
+                        </Column>
+                        <Column>
+                            <Text text="Quantity" />
+                        </Column>
+                        <Column>
+                            <Text text="Amount" />
+                        </Column>
+                        <Column>
+                            <Text text="Status" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{date}" />
+                                <Text text="{region}" />
+                                <Text text="{product}" />
+                                <Text text="{quantity}" />
+                                <Text text="{amount}" />
+                                <ObjectStatus
+                                    state="{statusState}"
+                                    text="{status}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

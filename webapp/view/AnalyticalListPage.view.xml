@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View
+    controllerName="com.tharaneeshwar.analyticalapp.controller.AnalyticalListPage"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    displayBlock="true">
+    <Page id="analyticsPage" title="{i18n>analyticsTitle}">
+        <headerContent>
+            <Button
+                icon="sap-icon://refresh"
+                press="onRefresh"
+                tooltip="{i18n>btnRefresh}" />
+            <Button
+                icon="sap-icon://list"
+                press="onNavigateToList"
+                tooltip="{i18n>btnList}" />
+        </headerContent>
+        <content>
+            <layout:BlockLayout>
+                <layout:BlockLayoutRow>
+                    <layout:BlockLayoutCell
+                        title="{i18n>salesTrendTitle}"
+                        backgroundColorSet="ColorSet1"
+                        backgroundColorShade="ShadeA">
+                        <VBox id="chartSalesTrend" height="400px" class="chartContainer" />
+                    </layout:BlockLayoutCell>
+                    <layout:BlockLayoutCell
+                        title="{i18n>marketShareTitle}"
+                        backgroundColorSet="ColorSet2"
+                        backgroundColorShade="ShadeA">
+                        <VBox id="chartMarketShare" height="400px" class="chartContainer" />
+                    </layout:BlockLayoutCell>
+                </layout:BlockLayoutRow>
+
+                <layout:BlockLayoutRow>
+                    <layout:BlockLayoutCell
+                        title="{i18n>topProductsTitle}"
+                        backgroundColorSet="ColorSet3"
+                        backgroundColorShade="ShadeA">
+                        <VBox id="chartTopProducts" height="400px" class="chartContainer" />
+                    </layout:BlockLayoutCell>
+                    <layout:BlockLayoutCell
+                        title="{i18n>regionPerformanceTitle}"
+                        backgroundColorSet="ColorSet4"
+                        backgroundColorShade="ShadeA">
+                        <VBox id="chartRegionPerformance" height="400px" class="chartContainer" />
+                    </layout:BlockLayoutCell>
+                </layout:BlockLayoutRow>
+
+                <!-- Variance Analysis Section -->
+                <layout:BlockLayoutRow>
+                    <layout:BlockLayoutCell
+                        title="{i18n>varianceAnalysis}"
+                        backgroundColorSet="ColorSet5"
+                        backgroundColorShade="ShadeA"
+                        width="1">
+                        <Table
+                            id="varianceTable"
+                            items="{path: '/varianceData', templateShareable: false}"
+                            mode="SingleSelect">
+                            <columns>
+                                <Column>
+                                    <Text text="Metric" />
+                                </Column>
+                                <Column>
+                                    <Text text="Actual" />
+                                </Column>
+                                <Column>
+                                    <Text text="Target" />
+                                </Column>
+                                <Column>
+                                    <Text text="Variance" />
+                                </Column>
+                                <Column>
+                                    <Text text="Variance %" />
+                                </Column>
+                                <Column>
+                                    <Text text="Status" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{metric}" />
+                                        <Text text="{actual}" />
+                                        <Text text="{target}" />
+                                        <Text text="{variance}" />
+                                        <Text text="{variancePercent}" />
+                                        <ObjectStatus
+                                            state="{statusState}"
+                                            text="{status}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </layout:BlockLayoutCell>
+                </layout:BlockLayoutRow>
+            </layout:BlockLayout>
+        </content>
+    </Page>
+</mvc:View>

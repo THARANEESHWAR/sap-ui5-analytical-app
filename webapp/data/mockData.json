@@ -1,0 +1,43 @@
+{
+  "sales": [
+    {
+      "id": "1",
+      "date": "2025-05-01",
+      "region": "North",
+      "product": "Product A",
+      "quantity": 100,
+      "amount": 10000,
+      "status": "Completed"
+    },
+    {
+      "id": "2",
+      "date": "2025-05-02",
+      "region": "South",
+      "product": "Product B",
+      "quantity": 80,
+      "amount": 8500,
+      "status": "Completed"
+    },
+    {
+      "id": "3",
+      "date": "2025-05-03",
+      "region": "East",
+      "product": "Product C",
+      "quantity": 120,
+      "amount": 14000,
+      "status": "Pending"
+    }
+  ],
+  "regions": [
+    { "id": "1", "name": "North" },
+    { "id": "2", "name": "South" },
+    { "id": "3", "name": "East" },
+    { "id": "4", "name": "West" }
+  ],
+  "products": [
+    { "id": "1", "name": "Product A" },
+    { "id": "2", "name": "Product B" },
+    { "id": "3", "name": "Product C" },
+    { "id": "4", "name": "Product D" }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "com.tharaneeshwar.analyticalapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "sourceTemplate": {
+      "id": "ui5template.analyticalapp",
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/analytical-service/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0",
+          "localUri": "data/mockData.json"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phoneHighRes": "",
+      "tablet": "",
+      "tabletHighRes": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "com.tharaneeshwar.analyticalapp.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.m": {},
+        "sap.ui.table": {},
+        "sap.ui.comp": {},
+        "sap.suite.ui.microchart": {},
+        "sap.viz": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.tharaneeshwar.analyticalapp.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "type": "sap.ui.model.odata.v4.ODataModel",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "useJSON": true
+        },
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.tharaneeshwar.analyticalapp.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false,
+        "bypassed": {
+          "target": [
+            "notFound"
+          ]
+        }
+      },
+      "targets": {
+        "listReport": {
+          "viewId": "ListReport",
+          "viewName": "ListReport"
+        },
+        "analyticalListPage": {
+          "viewId": "AnalyticalListPage",
+          "viewName": "AnalyticalListPage"
+        },
+        "objectPage": {
+          "viewId": "ObjectPage",
+          "viewName": "ObjectPage"
+        },
+        "charts": {
+          "viewId": "Charts",
+          "viewName": "Charts"
+        },
+        "notFound": {
+          "viewName": "NotFound"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "listReport",
+          "target": "listReport"
+        },
+        {
+          "pattern": "analytics",
+          "name": "analyticalListPage",
+          "target": "analyticalListPage"
+        },
+        {
+          "pattern": "object/{id}",
+          "name": "objectPage",
+          "target": "objectPage"
+        },
+        {
+          "pattern": "charts",
+          "name": "charts",
+          "target": "charts"
+        }
+      ]
+    }
+  },
+  "sap.platform.hcp": {
+    "uri": ""
+  }
+}

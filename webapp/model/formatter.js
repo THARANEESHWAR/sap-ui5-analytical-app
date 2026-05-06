@@ -9,6 +9,13 @@ sap.ui.define([], function () {
             return "$" + parseFloat(sValue).toLocaleString("en-US");
         },
 
+        formatAmount: function (nValue) {
+            if (nValue === undefined || nValue === null) {
+                return "";
+            }
+            return "$" + Number(nValue).toLocaleString("en-US");
+        },
+
         formatPercentage: function (sValue) {
             if (!sValue) {
                 return "";
